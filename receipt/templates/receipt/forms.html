@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+ <form id="receipt_form" method="post">
+    {% csrf_token %}
+    <!-- ReceiptFormのフィールド -->
+    {{ form.as_p }}
+  
+  
+  
+    <!-- 送信ボタン -->
+    <button type="submit">次へ</button>
+
+    
+    
+  </form>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="color: white; font-family: Georgia, serif;">Receipts</h1>
+{% comment %} <button type="submit" name='btn_sort1'>sort1</button> {% endcomment %}
+{% comment %} <button type="submit" name='btn_sort2'>sort2</button> {% endcomment %}
+{% for receipt in object_list %}
+<div id="receipt">
+    <h2>店名: {{ receipt.shop_name }}</h2>
+    <h4>日付: {{ receipt.date_time }}</h4>
+    <ul>
+        <a href='{% url 'receipt:detail' pk=receipt.pk %}' class="btn btn-dark">詳細へ</a>
+        <a href='{% url 'receipt:delete' pk=receipt.pk %}'  class="btn btn-danger">削除</a>
+    </ul>
+</div>
+{% endfor %}
+
+
+{% endblock content %}

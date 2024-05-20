@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post">
+    <div id="delete">
+        {% csrf_token %}
+        <h3>データ "{{ object }}" を本当に削除しますか?</h3>
+        <input type="submit" value="確定">
+    </div>
+</form>
+
+{% endblock %}

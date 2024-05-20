@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="receipt_detail">
+    <h2>ShopName: {{ object.shop_name }}</h2>
+    <h4>Date: {{ object.date_time }}</h4>
+    {% for i in item%}
+    <ul>
+        <li style="font-size:23px;">{{ i.product_name }} - {{ i.price }}yen - {{ i.quantity }}</li>
+    </ul>
+    {% endfor %}
+    <h3>合計: {{ object.total }}yen</h3>
+    <a href='{% url 'receipt:delete' pk=id %}' class="btn btn-danger">削除</a>
+</div>
+{% endblock %}

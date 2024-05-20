@@ -1,0 +1,67 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: #333333;
+}
+
+ul{
+    padding-left:0;
+}
+  
+li{
+    list-style:none;
+}
+
+
+#receipt {
+    text-align: center;
+    margin       : auto;
+    width        : 290px;
+    height       : 155px;
+    background   : linear-gradient(to bottom, white, white);
+    margin-bottom: 20px;
+    
+}
+
+
+/* ReceiptForm */
+#receipt_form {
+    margin-top: 100px;
+    text-align: center; /* フォーム全体を中央寄せにする */
+    color: white;
+}
+
+#receipt_form button {
+    margin-top: 10px; /* ボタンの上部に余白を追加する */
+}
+
+/* ItemForm */
+#item_form {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(3, 1fr); 例：3つの要素を3列に等分する */
+    /* grid-gap: 10px; オプション：要素間の間隔を設定 */
+}
+
+
+/* ReceiptDetail */
+#receipt_detail {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width        : 450px;
+    height       : auto;
+    background-color: white;
+}
+
+/* DeleteView */
+#delete {
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+}
