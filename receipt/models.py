@@ -15,7 +15,7 @@ class Item(models.Model):
     product_name = models.CharField(max_length=100)  # 商品名
     price = models.DecimalField(max_digits=10, decimal_places=2)  # 価格
     quantity = models.PositiveIntegerField()  # 数量
-    deadline = models.DateField(blank=True, null=True) #賞味・消費期限
+    expiration_date = models.DateField(blank=True, null=True) #賞味・消費期限
 
     def subtotal(self):
         return self.price * self.quantity

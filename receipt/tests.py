@@ -1,21 +1,17 @@
 from django.test import TestCase
-from .models import Item
 from django.db import models
+import datetime
 
+# 賞味・消費期限通知機能
 
-class Mymodel(models.Model):
-    test_model = models.JSONField()
+msg_list = []
+five_days = datetime.timedelta(days=5)
+zero_days = datetime.timedelta(days=0)
+today = datetime.date.today()
+day = '2024-6-21'
 
-    def __str__(self):
-        return self.test_model
-    
-def test(self):
-    for item in Item.objects.all():
-        obj = Mymodel(test_model=item)
-    obj.save()
-
-    print(obj)
-
-print(test)
-
-        
+# 文字列の日付をdatetime.date型に変換
+if day is not None:
+    day_date = datetime.datetime.strptime(day, '%Y-%m-%d').date()
+    delta = day_date - today
+    print(delta)

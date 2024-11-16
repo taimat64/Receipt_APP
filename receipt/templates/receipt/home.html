@@ -5,6 +5,15 @@
 <h1 style="color: white; font-family: Georgia, serif;">Receipts</h1>
 {% comment %} <button type="submit" name='btn_sort1'>sort1</button> {% endcomment %}
 {% comment %} <button type="submit" name='btn_sort2'>sort2</button> {% endcomment %}
+
+<ul>
+    {% for msg in msg_list %}
+        <li>{{ msg }}</li>
+    {% empty %}
+        <li>賞味・消費期限が近いアイテムはありません。</li>
+    {% endfor %}
+</ul>
+
 {% for receipt in object_list %}
 <div id="receipt">
     <h2>店名: {{ receipt.shop_name }}</h2>

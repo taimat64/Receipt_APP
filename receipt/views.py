@@ -5,7 +5,7 @@ from django.views.generic.edit import FormView
 from .forms import ReceiptForm, ItemForm
 from django.urls import reverse_lazy
 from django import forms
-
+import datetime
 
 
 #タイトル画面
@@ -15,15 +15,42 @@ def Title(request):
 #一覧画面
 class ReceiptListView(ListView):
     template_name = 'receipt/home.html'
-    model = Receipt  # この行を追加
-    
+    model = Receipt 
+
+    # 賞味・消費期限通知機能
+    def news_expiration_date(self):
+        msg_list = []
+        five_days = datetime.timedelta(days=5)
+        today = datetime.date.today()
+        items = Item.objects.all()
+        
+        for item in items:
+            name = item.product_name
+            day = item.expiration_date
+
+            if day:
+                delta = day - today
+                if delta <= five_days:
+                    msg = f"{name}の賞味期限は残り{delta.days}日です"
+                    msg_list.append(msg)
+        
+        return msg_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['msg_list'] = self.news_expiration_date()
+        return context
 
 
-#作成画面
+
+
+
+
+#レシート作成画面
 class CreateReceiptView(CreateView):
     model = Receipt
     form_class = ReceiptForm
-    template_name = 'receipt/forms.html'
+    template_name = 'receipt/receipt_form.html'
     success_url = reverse_lazy('receipt:item_form')
 
     #ItemFormの受け渡し
@@ -31,8 +58,15 @@ class CreateReceiptView(CreateView):
         context = super().get_context_data(**kwargs)
         context['item_form'] = ItemForm()
         return context
+    
+    #Receiptデータの受け渡し
+    def get_success_url(self):
+       receipt_id = self.object.id
+       return reverse_lazy('receipt:item_form', kwargs={'pk': receipt_id})
 
-#Form複製時に必要なデータ    
+#商品入力フォーム
+
+##Form複製時に必要なデータ    
 FORM_NUM = 1
 FORM_VALUES = {}
 
@@ -85,11 +119,20 @@ class CreateItemView(FormView):
         return super().form_valid(form)
 
 
+                
+
+             
+
+            
+        
+
+#レシート削除
 class DeleteReceiptView(DeleteView):
     model = Receipt
     success_url = reverse_lazy('receipt:home')
     template_name = 'receipt/receipt_delete.html'
 
+#レシート詳細
 class DetailReceiptView(DetailView):
     template_name = 'receipt/detail.html'
     model = Receipt  
@@ -108,10 +151,7 @@ class DetailReceiptView(DetailView):
         context['item'] = items  # コンテキストキーを 'item' から 'items' に変更
 
         return context
-    
+
 
 class KakeiboView(View):
-    def get(self, request, *args, **kwargs):
-        
-        return 
-        
+    pass

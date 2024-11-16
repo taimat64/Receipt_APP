@@ -6,8 +6,8 @@ app_name = 'receipt'
 urlpatterns = [
     path('', Title),
     path('home/', ReceiptListView.as_view(), name='home'),
-    path('forms/', CreateReceiptView.as_view(), name='receipt_form'),
-    path('item_form/', CreateItemView.as_view(), name='item_form'),
+    path('receipt_form/', CreateReceiptView.as_view(), name='receipt_form'),
+    path('item_form/<int:pk>/', CreateItemView.as_view(), name='item_form'),
     path('delete/<int:pk>/', DeleteReceiptView.as_view(), name='delete'),
     path('detail/<int:pk>/', DetailReceiptView.as_view(), name='detail')
 ]
