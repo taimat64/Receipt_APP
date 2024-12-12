@@ -21,6 +21,8 @@ class ReceiptListView(ListView):
     def news_expiration_date(self):
         msg_list = []
         five_days = datetime.timedelta(days=5)
+        zero_day = datetime.timedelta(days=0)
+        two_passed_day = datetime.timedelta(days=-2)
         today = datetime.date.today()
         items = Item.objects.all()
         
@@ -30,10 +32,15 @@ class ReceiptListView(ListView):
 
             if day:
                 delta = day - today
-                if delta <= five_days:
+                if delta >= zero_day and delta <= five_days:
                     msg = f"{name}の賞味期限は残り{delta.days}日です"
                     msg_list.append(msg)
-        
+                elif delta >= two_passed_day:
+                    msg = f"{name}の賞味期限が過ぎています"
+                    msg_list.append(msg)
+                else:
+                    msg = f"{name}の賞味期限が3日以上過ぎています"
+                    msg_list.append(msg)
         return msg_list
 
     def get_context_data(self, **kwargs):

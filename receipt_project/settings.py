@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=edk-&wv6e2!*4*r$2)g6rz90@i7nzwda$+=r^yfq^e@+stpw4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'receipt.apps.ReceiptConfig',
-    "widget_tweaks",  # 追加
+    "widget_tweaks"  # 追加
 ]
 
 MIDDLEWARE = [
@@ -137,5 +137,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
